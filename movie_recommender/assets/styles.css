@@ -1,0 +1,249 @@
+/* movie_recommender/assets/styles.css */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap');
+
+:root {
+    --bg-primary: #0d0d14;
+    --bg-secondary: #13131f;
+    --bg-card: #1a1a2e;
+    --accent-purple: #7c3aed;
+    --accent-purple-light: #a78bfa;
+    --accent-purple-glow: rgba(124, 58, 237, 0.3);
+    --text-primary: #ffffff;
+    --text-secondary: #9ca3af;
+    --text-muted: #6b7280;
+    --border-subtle: rgba(255, 255, 255, 0.06);
+    --progress-bar: #8b5cf6;
+}
+
+/* Main Body & General */
+body, .stApp {
+    font-family: 'Manrope', sans-serif;
+    background-color: var(--bg-primary) !important;
+    color: var(--text-primary);
+}
+
+/* Ambient glow */
+.stApp::before {
+    content: '';
+    position: fixed;
+    top: -150px;
+    right: -150px;
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(circle, var(--accent-purple-glow) 0%, transparent 60%);
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* Hide standard Streamlit header/footer */
+header {visibility: hidden;}
+footer {visibility: hidden;}
+
+/* Sidebar Overrides */
+[data-testid="stSidebar"] {
+    background-color: var(--bg-secondary) !important;
+    border-right: 1px solid var(--border-subtle);
+}
+[data-testid="stSidebar"] * {
+    font-family: 'Manrope', sans-serif !important;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, .brand-name {
+    font-family: 'Outfit', sans-serif;
+    color: #ffffff;
+    font-weight: 800;
+}
+
+h1 {
+    font-size: 3.5rem;
+    text-align: center;
+    background: linear-gradient(135deg, #ffffff 0%, #a78bfa 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 0.5rem;
+    position: relative;
+    z-index: 1;
+}
+
+.subtitle {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 1.2rem;
+    margin-bottom: 2.5rem;
+    position: relative;
+    z-index: 1;
+}
+
+/* Movie Card Style - Glassmorphism */
+.movie-card {
+    background: rgba(26, 26, 46, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 16px;
+    border: 1px solid var(--border-subtle);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+.movie-card:hover {
+    transform: scale(1.03) translateY(-5px);
+    box-shadow: 0 15px 30px var(--accent-purple-glow);
+    border-color: rgba(124, 58, 237, 0.4);
+}
+
+.movie-poster {
+    width: 100%;
+    height: auto;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: opacity 0.3s ease;
+}
+
+.movie-info {
+    padding: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.movie-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem 0;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.movie-meta {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.rating {
+    background-color: rgba(124, 58, 237, 0.2);
+    color: var(--accent-purple-light);
+    border: 1px solid rgba(124, 58, 237, 0.3);
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-weight: 700;
+}
+
+.genre-tags {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 4px 8px;
+    border-radius: 6px;
+    display: inline-block;
+}
+
+.overview-text {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 1.2rem;
+    line-height: 1.5;
+    flex-grow: 1;
+}
+
+.trailer-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 0.8rem;
+    background: linear-gradient(135deg, var(--accent-purple) 0%, #5b21b6 100%);
+    color: white !important;
+    text-align: center;
+    border-radius: 9999px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    margin-top: auto;
+    box-sizing: border-box;
+    box-shadow: 0 4px 15px var(--accent-purple-glow);
+}
+
+.trailer-btn:hover {
+    transform: scale(1.02);
+    background: linear-gradient(135deg, #8b5cf6 0%, var(--accent-purple) 100%);
+}
+
+/* Streamlit specific UI Overrides */
+div[data-baseweb="select"] > div {
+    background-color: #1e1e2e;
+    border: 1px solid var(--border-subtle);
+    border-radius: 9999px;
+    color: var(--text-primary);
+    padding: 2px 10px;
+    transition: all 0.3s ease;
+}
+
+div[data-baseweb="select"] > div:hover {
+    border-color: var(--accent-purple);
+}
+
+div[data-baseweb="select"] > div:focus-within {
+    box-shadow: 0 0 0 3px var(--accent-purple-glow);
+    border-color: var(--accent-purple);
+}
+
+.stButton > button {
+    background: linear-gradient(135deg, var(--accent-purple) 0%, #5b21b6 100%);
+    color: white;
+    border: none;
+    border-radius: 9999px;
+    padding: 0.6rem 2rem;
+    font-weight: 700;
+    font-family: inherit;
+    transition: all 0.3s ease;
+    width: 100%;
+    box-shadow: 0 4px 15px var(--accent-purple-glow);
+}
+
+.stButton > button:hover {
+    background: linear-gradient(135deg, #8b5cf6 0%, var(--accent-purple) 100%);
+    transform: scale(1.02);
+}
+
+/* Input Fields */
+input[type="text"], input[type="password"] {
+    background-color: #1e1e2e !important;
+    border: 1px solid var(--border-subtle) !important;
+    color: var(--text-primary) !important;
+    border-radius: 8px !important;
+}
+
+input[type="text"]:focus, input[type="password"]:focus {
+    box-shadow: 0 0 0 3px var(--accent-purple-glow) !important;
+    border-color: var(--accent-purple) !important;
+}
+
+/* Radio buttons */
+div[role="radiogroup"] label {
+    color: var(--text-secondary);
+}
+div[role="radiogroup"] label[data-checked="true"] {
+    color: var(--accent-purple-light);
+}
+
+/* Range slider */
+.stSlider > div > div > div > div {
+    background: var(--accent-purple) !important;
+}
